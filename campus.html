@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>UsEra Campus Navigation</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .campus-page {
+            padding: 50px 20px;
+            min-height: 80vh;
+        }
+
+        .campus-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .campus-header h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .campus-header p {
+            color: #666;
+        }
+
+        .map-container {
+            max-width: 900px;
+            margin: auto;
+            background: white;
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .campus-map {
+            position: relative;
+            height: 500px;
+            background: #f3f6f9;
+            border: 2px solid #ddd;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .location {
+            position: absolute;
+            padding: 12px 18px;
+            border: none;
+            border-radius: 10px;
+            background: #111827;
+            color: white;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .location:hover {
+            transform: scale(1.05);
+        }
+
+        .engineering {
+            top: 70px;
+            left: 80px;
+        }
+
+        .library {
+            top: 70px;
+            right: 80px;
+        }
+
+        .admin {
+            top: 210px;
+            left: 350px;
+        }
+
+        .student {
+            bottom: 80px;
+            left: 100px;
+        }
+
+        .exam {
+            bottom: 80px;
+            right: 100px;
+        }
+
+        #locationInfo {
+            margin-top: 20px;
+            padding: 18px;
+            border-radius: 12px;
+            background: #f8fafc;
+            text-align: center;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">UsEra</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="chat.html">Chat</a>
+    </nav>
+</header>
+
+
+<main class="campus-page">
+
+    <div class="campus-header">
+        <h1>🗺️ Campus Navigation</h1>
+        <p>Explore important university locations.</p>
+    </div>
+
+
+    <div class="map-container">
+
+        <div class="campus-map">
+
+            <button class="location engineering"
+                onclick="showLocation('Engineering')">
+                Engineering
+            </button>
+
+            <button class="location library"
+                onclick="showLocation('Library')">
+                Library
+            </button>
+
+            <button class="location admin"
+                onclick="showLocation('Administration')">
+                Administration
+            </button>
+
+            <button class="location student"
+                onclick="showLocation('Student Section')">
+                Student Section
+            </button>
+
+            <button class="location exam"
+                onclick="showLocation('Examination Cell')">
+                Examination Cell
+            </button>
+
+        </div>
+
+
+        <div id="locationInfo">
+            👆 Click a location on the map to see information.
+        </div>
+
+    </div>
+
+</main>
+
+
+<script>
+
+function showLocation(location) {
+
+    const info = document.getElementById("locationInfo");
+
+    const descriptions = {
+
+        "Engineering":
+            "Rai School of Engineering — a university academic school.",
+
+        "Library":
+            "Library & Learning Resources — academic learning resources for students.",
+
+        "Administration":
+            "University administration and academic support area.",
+
+        "Student Section":
+            "Student Section — student-related university services.",
+
+        "Examination Cell":
+            "Examination Cell — examination-related information and support."
+
+    };
+
+    info.innerText = descriptions[location];
+
+}
+
+</script>
+
+</body>
+</html>

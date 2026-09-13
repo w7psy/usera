@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>UsEra Code Doctor</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ================================
+           CODE DOCTOR PAGE
+        ================================= */
+
+        .doctor-page {
+            min-height: 100vh;
+            padding: 55px 20px 70px;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(76, 110, 245, 0.10), transparent 30%),
+                radial-gradient(circle at 90% 20%, rgba(124, 58, 237, 0.08), transparent 30%),
+                #f7f9fc;
+        }
+
+        /* Header */
+
+        .doctor-header {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 38px;
+        }
+
+        .doctor-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 62px;
+            height: 62px;
+            border-radius: 18px;
+            background: linear-gradient(135deg, #2563eb, #6d28d9);
+            color: white;
+            font-size: 30px;
+            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.25);
+            margin-bottom: 18px;
+        }
+
+        .doctor-header h1 {
+            margin: 0 0 10px;
+            font-size: clamp(34px, 5vw, 52px);
+            letter-spacing: -1.5px;
+            color: #111827;
+        }
+
+        .doctor-title-gradient {
+            background: linear-gradient(90deg, #2563eb, #6d28d9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .doctor-header p {
+            margin: 0;
+            color: #64748b;
+            font-size: 17px;
+        }
+
+        /* Feature highlights */
+
+        .doctor-highlights {
+            max-width: 1200px;
+            margin: 0 auto 25px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .highlight-card {
+            background: rgba(255, 255, 255, 0.92);
+            border: 1px solid #e8edf5;
+            border-radius: 17px;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            box-shadow: 0 8px 25px rgba(15, 23, 42, 0.05);
+        }
+
+        .highlight-icon {
+            width: 43px;
+            height: 43px;
+            min-width: 43px;
+            border-radius: 13px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 21px;
+            background: #eef4ff;
+        }
+
+        .highlight-card strong {
+            display: block;
+            color: #172033;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .highlight-card span {
+            color: #718096;
+            font-size: 12px;
+        }
+
+        /* Main layout */
+
+        .doctor-layout {
+            max-width: 1200px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 22px;
+            align-items: start;
+        }
+
+        .doctor-box {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid #e7ebf2;
+            border-radius: 20px;
+            padding: 22px;
+            box-shadow: 0 12px 35px rgba(15, 23, 42, 0.06);
+        }
+
+        .box-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .box-heading-left {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .box-heading-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #edf4ff;
+            color: #2563eb;
+            font-size: 18px;
+        }
+
+        .box-heading h2 {
+            font-size: 17px;
+            margin: 0;
+            color: #172033;
+        }
+
+        .clear-btn {
+            border: none;
+            background: transparent;
+            color: #2563eb;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .clear-btn:hover {
+            color: #1d4ed8;
+        }
+
+        /* Code editor */
+
+        .editor-wrapper {
+            position: relative;
+        }
+
+        .code-input {
+            width: 100%;
+            min-height: 350px;
+            padding: 20px;
+            box-sizing: border-box;
+            border: 1px solid #dce3ed;
+            border-radius: 15px;
+            background: #17202d;
+            color: #e5edf8;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 14px;
+            line-height: 1.65;
+            resize: vertical;
+            outline: none;
+            tab-size: 4;
+        }
+
+        .code-input::placeholder {
+            color: #7d8a9d;
+        }
+
+        .code-input:focus {
+            border-color: #4f7cff;
+            box-shadow: 0 0 0 4px rgba(79, 124, 255, 0.10);
+        }
+
+        .editor-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 9px;
+            color: #7b8798;
+            font-size: 12px;
+        }
+
+        .language-badge {
+            padding: 6px 11px;
+            border-radius: 8px;
+            background: #f1f5f9;
+            color: #334155;
+            font-weight: 600;
+        }
+
+        /* Main button */
+
+        .doctor-button {
+            width: 100%;
+            margin-top: 17px;
+            padding: 15px 20px;
+            border: none;
+            border-radius: 12px;
+            background: linear-gradient(90deg, #2563eb, #4f46e5);
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.25s ease;
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.20);
+        }
+
+        .doctor-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(37, 99, 235, 0.28);
+        }
+
+        .doctor-button:disabled {
+            opacity: 0.7;
+            cursor: wait;
+            transform: none;
+        }
+
+        /* Example box */
+
+        .example-box {
+            margin-top: 18px;
+            padding: 18px;
+            border: 1px solid #e5eaf2;
+            border-radius: 15px;
+            background: #fbfcfe;
+        }
+
+        .example-title {
+            font-weight: 700;
+            color: #263247;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        .example-code {
+            background: #f1f5f9;
+            border-radius: 11px;
+            padding: 13px;
+            color: #334155;
+            font-family: Consolas, monospace;
+            font-size: 12px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+        }
+
+        /* Result area */
+
+        .result {
+            min-height: 350px;
+        }
+
+        .result-placeholder {
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #64748b;
+            border: 1px dashed #d7dfeb;
+            border-radius: 15px;
+            background: #fafcff;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .result-placeholder .big-icon {
+            font-size: 42px;
+            margin-bottom: 12px;
+        }
+
+        .result-placeholder h3 {
+            margin: 0 0 7px;
+            color: #172033;
+        }
+
+        .result-placeholder p {
+            margin: 0;
+            font-size: 13px;
+            max-width: 400px;
+        }
+
+        /* Loading */
+
+        .loading-box {
+            min-height: 350px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #64748b;
+        }
+
+        .loader {
+            width: 42px;
+            height: 42px;
+            border: 4px solid #dbe5ff;
+            border-top-color: #2563eb;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* AI Result cards */
+
+        .ai-result {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .result-status {
+            padding: 14px 16px;
+            border-radius: 13px;
+            background: #ecfdf5;
+            border: 1px solid #c8f1dc;
+            color: #087443;
+            font-weight: 700;
+        }
+
+        .result-section {
+            border-radius: 13px;
+            padding: 16px;
+            border: 1px solid;
+        }
+
+        .result-section h3 {
+            margin: 0 0 9px;
+            font-size: 14px;
+        }
+
+        .result-section-content {
+            color: #3f4c61;
+            font-size: 13px;
+            line-height: 1.7;
+        }
+
+        .section-purpose {
+            background: #eff6ff;
+            border-color: #cfe0ff;
+        }
+
+        .section-purpose h3 {
+            color: #1d4ed8;
+        }
+
+        .section-error {
+            background: #fff1f2;
+            border-color: #ffd2d7;
+        }
+
+        .section-error h3 {
+            color: #dc2626;
+        }
+
+        .section-code {
+            background: #ecfdf5;
+            border-color: #c7f1d9;
+        }
+
+        .section-code h3 {
+            color: #059669;
+        }
+
+        .section-explanation {
+            background: #f5f3ff;
+            border-color: #ddd6fe;
+        }
+
+        .section-explanation h3 {
+            color: #6d28d9;
+        }
+
+        .section-tips {
+            background: #fffbeb;
+            border-color: #fde7a9;
+        }
+
+        .section-tips h3 {
+            color: #b45309;
+        }
+
+        .ai-code {
+            margin-top: 10px;
+            padding: 15px;
+            border-radius: 10px;
+            background: #17202d;
+            color: #e5edf8;
+            overflow-x: auto;
+            font-family: Consolas, "Courier New", monospace;
+            font-size: 12px;
+            line-height: 1.65;
+            white-space: pre-wrap;
+        }
+
+        .copy-code {
+            margin-top: 9px;
+            border: none;
+            border-radius: 8px;
+            padding: 7px 11px;
+            background: white;
+            color: #334155;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .copy-code:hover {
+            background: #f1f5f9;
+        }
+
+        .error-message {
+            min-height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #dc2626;
+            background: #fff5f5;
+            border: 1px solid #fecaca;
+            border-radius: 15px;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* Responsive */
+
+        @media (max-width: 950px) {
+            .doctor-highlights {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .doctor-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .doctor-page {
+                padding: 35px 14px 50px;
+            }
+
+            .doctor-highlights {
+                grid-template-columns: 1fr;
+            }
+
+            .doctor-box {
+                padding: 15px;
+            }
+
+            .code-input {
+                min-height: 280px;
+            }
+
+            .result-placeholder,
+            .loading-box {
+                min-height: 280px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">UsEra</div>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="chat.html">Chat</a>
+        <a href="index.html#features">Features</a>
+        <a href="index.html#about">About</a>
+    </nav>
+</header>
+
+
+<main class="doctor-page">
+
+    <!-- HERO -->
+
+    <div class="doctor-header">
+
+        <div class="doctor-icon">🩺</div>
+
+        <h1>
+            UsEra <span class="doctor-title-gradient">Code Doctor</span>
+        </h1>
+
+        <p>
+            Paste your code and let UsEra find, explain and fix the problem.
+        </p>
+
+    </div>
+
+
+    <!-- HIGHLIGHTS -->
+
+    <div class="doctor-highlights">
+
+        <div class="highlight-card">
+            <div class="highlight-icon">🔎</div>
+            <div>
+                <strong>Find Issues</strong>
+                <span>Detect errors and bugs</span>
+            </div>
+        </div>
+
+        <div class="highlight-card">
+            <div class="highlight-icon">💡</div>
+            <div>
+                <strong>Explain Clearly</strong>
+                <span>Beginner-friendly explanations</span>
+            </div>
+        </div>
+
+        <div class="highlight-card">
+            <div class="highlight-icon">🔧</div>
+            <div>
+                <strong>Suggest Fixes</strong>
+                <span>Provides corrected code</span>
+            </div>
+        </div>
+
+        <div class="highlight-card">
+            <div class="highlight-icon">🎓</div>
+            <div>
+                <strong>Learn Better</strong>
+                <span>Understand and improve</span>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- MAIN -->
+
+    <div class="doctor-layout">
+
+        <!-- LEFT SIDE -->
+
+        <div>
+
+            <div class="doctor-box">
+
+                <div class="box-heading">
+
+                    <div class="box-heading-left">
+                        <div class="box-heading-icon">‹/›</div>
+                        <h2>Your Code</h2>
+                    </div>
+
+                    <button class="clear-btn" onclick="clearCode()">
+                        🗑 Clear
+                    </button>
+
+                </div>
+
+
+                <div class="editor-wrapper">
+
+                    <textarea
+                        id="codeInput"
+                        class="code-input"
+                        placeholder="Paste your code here..."
+                        spellcheck="false"
+                    ></textarea>
+
+                </div>
+
+
+                <div class="editor-footer">
+                    <span class="language-badge">💻 Code</span>
+                    <span id="charCount">0 characters</span>
+                </div>
+
+
+                <button
+                    id="checkButton"
+                    class="doctor-button"
+                    onclick="checkCode()"
+                >
+                    🩺 Check My Code &nbsp; →
+                </button>
+
+            </div>
+
+
+            <!-- EXAMPLE -->
+
+            <div class="doctor-box example-box">
+
+                <div class="example-title">
+                    📄 Example Code — Try this
+                </div>
+
+                <div class="example-code">n = 5
+fact = 1
+
+for i in range(1, n+1):
+    fact = fact * i
+
+print(fact)</div>
+
+                <button
+                    class="copy-code"
+                    onclick="useExample()"
+                >
+                    Use Example
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="doctor-box">
+
+            <div class="box-heading">
+
+                <div class="box-heading-left">
+                    <div class="box-heading-icon">✨</div>
+                    <h2>Code Doctor Result</h2>
+                </div>
+
+            </div>
+
+
+            <div id="result">
+
+                <div class="result-placeholder">
+
+                    <div class="big-icon">🤖</div>
+
+                    <h3>Your Code Doctor is ready!</h3>
+
+                    <p>
+                        Paste your code and click
+                        <b>"Check My Code"</b> to get an AI-powered
+                        analysis.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<script>
+
+    const codeInput = document.getElementById("codeInput");
+    const result = document.getElementById("result");
+    const charCount = document.getElementById("charCount");
+    const checkButton = document.getElementById("checkButton");
+
+
+    /* Character counter */
+
+    codeInput.addEventListener("input", function () {
+        charCount.innerText = this.value.length + " characters";
+    });
+
+
+    /* Clear code */
+
+    function clearCode() {
+
+        codeInput.value = "";
+
+        charCount.innerText = "0 characters";
+
+        result.innerHTML = `
+            <div class="result-placeholder">
+                <div class="big-icon">🤖</div>
+                <h3>Your Code Doctor is ready!</h3>
+                <p>
+                    Paste your code and click
+                    <b>"Check My Code"</b> to get an AI-powered analysis.
+                </p>
+            </div>
+        `;
+    }
+
+
+    /* Example code */
+
+    function useExample() {
+
+        codeInput.value = `n = 5
+fact = 1
+
+for i in range(1, n+1):
+    fact = fact * i
+
+print(fact)`;
+
+        charCount.innerText =
+            codeInput.value.length + " characters";
+
+        codeInput.focus();
+    }
+
+
+    /* Escape HTML safely */
+
+    function escapeHTML(text) {
+
+        return text
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+
+    /* Convert AI reply into beautiful sections */
+
+    function formatAIReply(reply) {
+
+        const safeReply = escapeHTML(reply);
+
+        const parts = safeReply.split(
+            /(?=1\.\s*What the code is trying to do|2\.\s*Errors or problems|3\.\s*Corrected code|4\.\s*A simple beginner-friendly explanation|5\.\s*Tips for improvement)/i
+        );
+
+        let html = `
+            <div class="ai-result">
+
+                <div class="result-status">
+                    ✅ Analysis Complete!
+                    <div style="font-size:12px;font-weight:500;margin-top:4px;">
+                        Here's what UsEra found in your code.
+                    </div>
+                </div>
+        `;
+
+        parts.forEach(function (part) {
+
+            const text = part.trim();
+
+            if (!text) return;
+
+
+            /* Section 1 */
+
+            if (/^1\./.test(text)) {
+
+                const content = text
+                    .replace(/^1\.\s*What the code is trying to do\s*/i, "")
+                    .trim();
+
+                html += `
+                    <div class="result-section section-purpose">
+                        <h3>🎯 1. What the code is trying to do</h3>
+                        <div class="result-section-content">
+                            ${content.replace(/\n/g, "<br>")}
+                        </div>
+                    </div>
+                `;
+            }
+
+
+            /* Section 2 */
+
+            else if (/^2\./.test(text)) {
+
+                const content = text
+                    .replace(/^2\.\s*Errors or problems\s*/i, "")
+                    .trim();
+
+                html += `
+                    <div class="result-section section-error">
+                        <h3>🚨 2. Errors or problems</h3>
+                        <div class="result-section-content">
+                            ${content.replace(/\n/g, "<br>")}
+                        </div>
+                    </div>
+                `;
+            }
+
+
+            /* Section 3 */
+
+            else if (/^3\./.test(text)) {
+
+                let content = text
+                    .replace(/^3\.\s*Corrected code if needed\s*/i, "")
+                    .replace(/^3\.\s*Corrected code\s*/i, "")
+                    .trim();
+
+                const codeMatch =
+                    content.match(/```(?:[a-zA-Z0-9+#]*)?\s*([\s\S]*?)```/);
+
+                if (codeMatch) {
+
+                    const code = codeMatch[1].trim();
+
+                    content = content
+                        .replace(/```(?:[a-zA-Z0-9+#]*)?\s*[\s\S]*?```/, "")
+                        .trim();
+
+                    html += `
+                        <div class="result-section section-code">
+
+                            <h3>✅ 3. Corrected code</h3>
+
+                            <div class="result-section-content">
+                                ${content.replace(/\n/g, "<br>")}
+                            </div>
+
+                            <pre class="ai-code">${code}</pre>
+
+                            <button
+                                class="copy-code"
+                                onclick="copyCode(this)"
+                                data-code="${encodeURIComponent(code)}"
+                            >
+                                📋 Copy Code
+                            </button>
+
+                        </div>
+                    `;
+
+                } else {
+
+                    html += `
+                        <div class="result-section section-code">
+
+                            <h3>✅ 3. Corrected code</h3>
+
+                            <div class="result-section-content">
+                                ${content.replace(/\n/g, "<br>")}
+                            </div>
+
+                        </div>
+                    `;
+                }
+            }
+
+
+            /* Section 4 */
+
+            else if (/^4\./.test(text)) {
+
+                const content = text
+                    .replace(/^4\.\s*A simple beginner-friendly explanation\s*/i, "")
+                    .replace(/^4\.\s*Explanation\s*/i, "")
+                    .trim();
+
+                html += `
+                    <div class="result-section section-explanation">
+
+                        <h3>📖 4. Beginner-friendly explanation</h3>
+
+                        <div class="result-section-content">
+                            ${content.replace(/\n/g, "<br>")}
+                        </div>
+
+                    </div>
+                `;
+            }
+
+
+            /* Section 5 */
+
+            else if (/^5\./.test(text)) {
+
+                const content = text
+                    .replace(/^5\.\s*Tips for improvement\s*/i, "")
+                    .trim();
+
+                html += `
+                    <div class="result-section section-tips">
+
+                        <h3>💡 5. Tips for improvement</h3>
+
+                        <div class="result-section-content">
+                            ${content.replace(/\n/g, "<br>")}
+                        </div>
+
+                    </div>
+                `;
+            }
+
+        });
+
+
+        html += `</div>`;
+
+        return html;
+    }
+
+
+    /* Copy corrected code */
+
+    function copyCode(button) {
+
+        const code = decodeURIComponent(
+            button.getAttribute("data-code")
+        );
+
+        navigator.clipboard.writeText(code);
+
+        button.innerText = "✅ Copied!";
+
+        setTimeout(function () {
+            button.innerText = "📋 Copy Code";
+        }, 1500);
+    }
+
+
+    /* Main Code Doctor */
+
+    async function checkCode() {
+
+        const code = codeInput.value.trim();
+
+        if (code === "") {
+
+            result.innerHTML = `
+                <div class="error-message">
+                    ⚠️ Please paste some code first.
+                </div>
+            `;
+
+            return;
+        }
+
+
+        /* Loading */
+
+        checkButton.disabled = true;
+        checkButton.innerHTML = "🩺 Analyzing Code...";
+
+        result.innerHTML = `
+            <div class="loading-box">
+
+                <div class="loader"></div>
+
+                <h3>Code Doctor is analyzing...</h3>
+
+                <p>
+                    UsEra is checking your code for errors and improvements.
+                </p>
+
+            </div>
+        `;
+
+
+        const prompt = `
+You are UsEra Code Doctor.
+
+Analyze the following code for an IT student.
+
+Please provide:
+
+1. What the code is trying to do
+2. Errors or problems
+3. Corrected code if needed
+4. A simple beginner-friendly explanation
+5. Tips for improvement
+
+Do not unnecessarily change working code.
+
+Keep the explanation simple and clear.
+
+CODE:
+
+${code}
+`;
+
+
+        try {
+
+            const response = await fetch(
+                "http://127.0.0.1:5000/chat",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+
+                    body: JSON.stringify({
+                        message: prompt
+                    })
+                }
+            );
+
+
+            const data = await response.json();
+
+
+            if (data.reply) {
+
+                result.innerHTML =
+                    formatAIReply(data.reply);
+
+            } else {
+
+                result.innerHTML = `
+                    <div class="error-message">
+                        ❌ UsEra could not generate a response.
+                    </div>
+                `;
+            }
+
+
+        } catch (error) {
+
+            result.innerHTML = `
+                <div class="error-message">
+                    ❌ Could not connect to UsEra AI server.
+                    <br><br>
+                    Please make sure <b>server.py</b> is running.
+                </div>
+            `;
+
+            console.error(error);
+
+        } finally {
+
+            checkButton.disabled = false;
+
+            checkButton.innerHTML =
+                "🩺 Check My Code &nbsp; →";
+        }
+    }
+
+</script>
+
+</body>
+</html>
