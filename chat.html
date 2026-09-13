@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UsEra AI Assistant</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">UsEra</div>
+
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="#">Chat</a>
+        </nav>
+    </header>
+
+
+    <main class="chat-page">
+
+        <div class="chat-container">
+
+            <div class="chat-title">
+                <div class="status"></div>
+
+                <div>
+                    <h1>UsEra AI Assistant</h1>
+                    <p>Ask me anything about your university.</p>
+                </div>
+            </div>
+
+
+            <div class="messages" id="messages">
+
+                <div class="message ai-message">
+                    👋 Hi! I'm UsEra.
+
+                    <br><br>
+
+                    I can help you with university information,
+                    study guidance, campus navigation and coding.
+                </div>
+
+            </div>
+
+
+            <div class="chat-box">
+
+                <input
+                    type="text"
+                    id="userInput"
+                    placeholder="Ask UsEra anything..."
+                    onkeydown="handleEnter(event)"
+                >
+
+                <button onclick="sendMessage()">
+                    ➤
+                </button>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+    async function sendMessage() {
+
+        const input = document.getElementById("userInput");
+        const messages = document.getElementById("messages");
+
+        const text = input.value.trim();
+
+        if (text === "") {
+            return;
+        }
+
+        // Show user message
+        const userMessage = document.createElement("div");
+        userMessage.className = "message user-message";
+        userMessage.innerText = text;
+        messages.appendChild(userMessage);
+
+        input.value = "";
+
+        // Show thinking message
+        const thinkingMessage = document.createElement("div");
+        thinkingMessage.className = "message ai-message";
+        thinkingMessage.innerText = "🤔 UsEra is thinking...";
+        messages.appendChild(thinkingMessage);
+
+        messages.scrollTop = messages.scrollHeight;
+
+        try {
+
+            const response = await fetch("/chat", {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    message: text
+                })
+            });
+
+            const data = await response.json();
+
+            // Remove thinking message
+            thinkingMessage.remove();
+
+            // Show AI response
+            const aiMessage = document.createElement("div");
+            aiMessage.className = "message ai-message";
+            aiMessage.innerText = data.reply;
+
+            messages.appendChild(aiMessage);
+
+            messages.scrollTop = messages.scrollHeight;
+
+        } catch (error) {
+
+            thinkingMessage.remove();
+
+            const errorMessage = document.createElement("div");
+            errorMessage.className = "message ai-message";
+            errorMessage.innerText =
+                "❌ Sorry, I couldn't connect to the UsEra AI server.";
+
+            messages.appendChild(errorMessage);
+
+            messages.scrollTop = messages.scrollHeight;
+
+            console.error(error);
+        }
+    }
+
+
+    function handleEnter(event) {
+
+        if (event.key === "Enter") {
+            sendMessage();
+        }
+
+    }
+
+</script>

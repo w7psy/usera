@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sign Up - UsEra</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .auth-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px 20px;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(37, 99, 235, 0.12), transparent 30%),
+                radial-gradient(circle at 90% 90%, rgba(109, 40, 217, 0.10), transparent 30%),
+                #f7f9fc;
+        }
+
+        .auth-card {
+            width: 100%;
+            max-width: 430px;
+            background: white;
+            padding: 38px;
+            border-radius: 24px;
+            box-shadow: 0 20px 60px rgba(15, 23, 42, 0.10);
+            border: 1px solid #e8edf5;
+        }
+
+        .auth-logo {
+            text-align: center;
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .auth-logo span {
+            background: linear-gradient(90deg, #2563eb, #6d28d9);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .auth-card h1 {
+            text-align: center;
+            margin-bottom: 8px;
+            color: #172033;
+        }
+
+        .auth-subtitle {
+            text-align: center;
+            color: #64748b;
+            margin-bottom: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 17px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 7px;
+            color: #334155;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .input-group input {
+            width: 100%;
+            box-sizing: border-box;
+            padding: 13px 14px;
+            border: 1px solid #dbe2ec;
+            border-radius: 11px;
+            outline: none;
+            font-size: 14px;
+        }
+
+        .input-group input:focus {
+            border-color: #4f7cff;
+            box-shadow: 0 0 0 4px rgba(79, 124, 255, 0.10);
+        }
+
+        .auth-button {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 11px;
+            background: linear-gradient(90deg, #2563eb, #4f46e5);
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .auth-message {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 13px;
+        }
+
+        .auth-switch {
+            text-align: center;
+            margin-top: 22px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .auth-switch a {
+            color: #2563eb;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .back-home {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #64748b;
+            text-decoration: none;
+            font-size: 13px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="auth-page">
+
+        <div class="auth-card">
+
+            <div class="auth-logo">
+                <span>UsEra</span>
+            </div>
+
+            <h1>Create Account 🚀</h1>
+
+            <p class="auth-subtitle">
+                Create your account and start using UsEra.
+            </p>
+
+            <form onsubmit="signupUser(event)">
+
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input
+                        type="text"
+                        id="signupName"
+                        placeholder="Enter your name"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label>Email</label>
+                    <input
+                        type="email"
+                        id="signupEmail"
+                        placeholder="Enter your email"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label>Password</label>
+                    <input
+                        type="password"
+                        id="signupPassword"
+                        placeholder="Create a password"
+                        minlength="6"
+                        required
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label>Confirm Password</label>
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Confirm your password"
+                        minlength="6"
+                        required
+                    >
+                </div>
+
+                <button class="auth-button" type="submit">
+                    Create Account →
+                </button>
+
+            </form>
+
+            <div id="signupMessage" class="auth-message"></div>
+
+            <div class="auth-switch">
+                Already have an account?
+                <a href="login.html">Login</a>
+            </div>
+
+            <a href="index.html" class="back-home">
+                ← Back to UsEra
+            </a>
+
+        </div>
+
+    </main>
+
+
+    <script>
+
+        function signupUser(event) {
+
+            event.preventDefault();
+
+            const name =
+                document.getElementById("signupName").value;
+
+            const email =
+                document.getElementById("signupEmail").value;
+
+            const password =
+                document.getElementById("signupPassword").value;
+
+            const confirmPassword =
+                document.getElementById("confirmPassword").value;
+
+            const message =
+                document.getElementById("signupMessage");
+
+
+            if (password !== confirmPassword) {
+
+                message.style.color = "#dc2626";
+
+                message.innerText =
+                    "❌ Passwords do not match.";
+
+                return;
+            }
+
+
+            const user = {
+                name: name,
+                email: email,
+                password: password
+            };
+
+
+            localStorage.setItem(
+                "user",
+                JSON.stringify(user)
+            );
+
+
+            message.style.color = "#059669";
+
+            message.innerText =
+                "✅ Account created successfully!";
+
+
+            setTimeout(function () {
+
+                window.location.href = "login.html";
+
+            }, 900);
+        }
+
+    </script>
+
+</body>
+</html>
