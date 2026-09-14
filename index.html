@@ -1163,87 +1163,7 @@
 
         <div id="reviewGrid" class="review-grid">
 
-            <div class="review-card">
-
-                <div class="stars">
-                    ★★★★★
-                </div>
-
-                <p class="review-text">
-                    “UsEra makes it easier to find university
-                    information and get help quickly.”
-                </p>
-
-                <div class="review-user">
-
-                    <div class="review-avatar">
-                        A
-                    </div>
-
-                    <div>
-                        <strong>Sample Student</strong>
-                        <span>Student Review</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="review-card">
-
-                <div class="stars">
-                    ★★★★★
-                </div>
-
-                <p class="review-text">
-                    “The study assistant is a really useful
-                    idea for students.”
-                </p>
-
-                <div class="review-user">
-
-                    <div class="review-avatar">
-                        S
-                    </div>
-
-                    <div>
-                        <strong>Sample Student</strong>
-                        <span>Student Review</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <div class="review-card">
-
-                <div class="stars">
-                    ★★★★★
-                </div>
-
-                <p class="review-text">
-                    “Code Doctor makes programming problems
-                    much easier to understand.”
-                </p>
-
-                <div class="review-user">
-
-                    <div class="review-avatar">
-                        R
-                    </div>
-
-                    <div>
-                        <strong>Sample Student</strong>
-                        <span>Student Review</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
+           </div>
 
 
         <!-- WRITE REVIEW -->
@@ -1395,7 +1315,7 @@
        STUDENT REVIEWS
     ========================================= */
 
-    function submitReview(event) {
+   async function submitReview(event) {
 
         event.preventDefault();
 
@@ -1428,25 +1348,30 @@
         };
 
 
-        const reviews =
-            JSON.parse(
-                localStorage.getItem("useraReviews") || "[]"
-            );
+       try {
+    const response = await fetch("/reviews", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(review)
+    });
+
+    if (!response.ok) {
+        throw new Error("Failed to save review");
+    }
+
+    addReviewToPage(review);
+
+    document.querySelector(".review-form").reset();
+
+} catch (error) {
+    console.error(error);
+    alert("Could not save your review. Please try again.");
+}
 
 
-        reviews.push(review);
-
-
-        localStorage.setItem(
-            "useraReviews",
-            JSON.stringify(reviews)
-        );
-
-
-        addReviewToPage(review);
-
-
-        document.querySelector(".review-form").reset();
+       
 
 
         message.innerText =
@@ -1524,28 +1449,28 @@
 
     }
 
+// Load saved reviews from database
+async function loadReviewsFromDatabase() {
+    try {
+        const response = await fetch("/reviews");
 
-    /* Load saved reviews */
+        if (!response.ok) {
+            throw new Error("Failed to load reviews");
+        }
 
-    function loadReviews() {
+        const reviews = await response.json();
 
-        const reviews =
-            JSON.parse(
-                localStorage.getItem("useraReviews") || "[]"
-            );
-
-
-        reviews.forEach(function(review) {
-
+        reviews.reverse().forEach(function(review) {
             addReviewToPage(review);
-
         });
 
+    } catch (error) {
+        console.error("Could not load reviews:", error);
     }
+}
 
-
-    loadReviews();
-
+loadReviewsFromDatabase();
+   
 </script>
 
 <script>
