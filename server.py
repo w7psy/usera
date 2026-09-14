@@ -62,31 +62,6 @@ def add_review():
         "message": "Review saved successfully."
     })
 
-@app.route("/reviews", methods=["GET"])
-def get_reviews():
-    conn = sqlite3.connect("reviews.db")
-    cursor = conn.cursor()
-
-    cursor.execute("""
-        SELECT name, course, rating, review
-        FROM reviews
-        ORDER BY id DESC
-    """)
-
-    rows = cursor.fetchall()
-    conn.close()
-
-    reviews = []
-
-    for row in rows:
-        reviews.append({
-            "name": row[0],
-            "course": row[1],
-            "rating": row[2],
-            "text": row[3]
-        })
-
-    return jsonify(reviews)
 
 # =========================
 # WEBSITE PAGES
@@ -280,47 +255,7 @@ def get_reviews():
     return jsonify(reviews)
 
 
-@app.route("/reviews", methods=["POST"])
-def add_review():
-    data = request.get_json()
 
-    name = data.get("name", "").strip()
-    course = data.get("course", "").strip()
-    rating = data.get("rating")
-    review = data.get("review", "").strip()
-
-    if not name or not course or not rating or not review:
-        return jsonify({
-            "error": "Please fill all fields."
-        }), 400
-
-    try:
-        rating = int(rating)
-    except:
-        return jsonify({
-            "error": "Invalid rating."
-        }), 400
-
-    if rating < 1 or rating > 5:
-        return jsonify({
-            "error": "Rating must be between 1 and 5."
-        }), 400
-
-    conn = sqlite3.connect("reviews.db")
-    cursor = conn.cursor()
-
-    cursor.execute("""
-        INSERT INTO reviews (name, course, rating, review)
-        VALUES (?, ?, ?, ?)
-    """, (name, course, rating, review))
-
-    conn.commit()
-    conn.close()
-
-    return jsonify({
-        "success": True,
-        "message": "Review submitted successfully!"
-    })
 
 # =========================
 # RUN SERVER
