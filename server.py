@@ -275,6 +275,8 @@ RAI UNIVERSITY INFORMATION
 ==================================================
 
 Rai University is located in Ahmedabad, Gujarat.
+phone number: 8980004325
+
 
 The university includes these schools:
 
