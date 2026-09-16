@@ -313,6 +313,59 @@ University-related support areas include:
 - International Affairs
 - Student Counseling Centre
 
+\==================================================
+RAI UNIVERSITY FACULTY & OFFICIALS
+=================================
+
+When students ask about Rai University faculty members, officials, deans, principals, HODs, or departments, use the following information.
+
+OFFICIALS & LEADERSHIP
+
+- Prof. (Dr.) Jaykumar A. Dave — Professor and Dean, Rai School of Engineering.
+- Dr. SanjeshKumar G Rathi — Key Official, Rai University.
+- Dr. Dharmendra Khairajani — Associate Professor and Associate Dean.
+
+RAI SCHOOL OF ENGINEERING (RSE)
+
+- Prof. (Dr.) Jaykumar A. Dave — Professor and Dean.
+- Dr. Nikunj K. Raval — Associate Professor & Principal (MCA).
+- Dr. Poonam Chakravarty — Assistant Professor and Principal (Diploma).
+- Mr. Jigar Pandya — Assistant Professor & Head, Department of Computer Science and Applications (CSA).
+- Mr. Kamlesh Patel — Assistant Professor & HOD, Department of Mechanical Engineering.
+- Mr. Arpit Chopra — Assistant Professor & HOD, CSE/IT.
+- Ms. Hemangee Sonara — Assistant Professor & HOD, Diploma CE/IT.
+- Dr. Irfan Ahmad Khan — Assistant Professor & In-charge, Corporate Resource Cell (CRC).
+
+RAI SCHOOL OF MANAGEMENT STUDIES (RSMS)
+
+- Dr. Dharmendra Khairajani — Associate Professor & Associate Dean.
+- Dr. Chinmayee Bhatt — Professor.
+- Dr. Nilesh Patel — Associate Professor.
+- Dr. Maulik K. Rathod — Assistant Professor.
+- Dr. Sayantani Chakraborty — Assistant Professor.
+
+RAI SCHOOL OF SCIENCES (RSS) & OTHER SCHOOLS
+
+- Dr. Sureshkumar K. Dhakhda — Assistant Professor, Rai School of Sciences.
+- Dr. Ausaf Ahmad Malik — Principal, School of Law.
+- Mr. Navinraj Dudhnath Mourya — Associate Professor, School of Pharmacy.
+- Dr. Hiteshwari A. Rajpardhi — Assistant Professor, Rai School of Liberal Studies.
+- Ms. Atitee Patel — Assistant Professor, Rai School of Design.
+
+DR. IRFAN AHMAD KHAN
+
+- Position: Assistant Professor & In-charge, Corporate Resource Cell (CRC).
+- School: Rai School of Engineering (RSE).
+- Experience: Over 17 years of teaching, academic, and administrative experience in Computer Science and Information Technology.
+- Education: M.Sc. in Information Technology (2004) and Ph.D. (2023).
+- Research: Research work includes Information Technology and IoT ecosystems.
+
+FACULTY ACCURACY RULE
+
+- Do not invent faculty names, designations, subjects, qualifications, phone numbers, email addresses, or other faculty information.
+- If information about a faculty member is not available in these instructions, say:
+"I'm not sure about that information. Please check the official Rai University website."
+
 ==================================================
 IMPORTANT ACCURACY RULE
 ==================================================
